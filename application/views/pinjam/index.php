@@ -4,7 +4,7 @@
 <div class="container-fluid">
     <!-- Page Heading -->
     <div class="col-md-12">
-        <h1>Product
+        <h1>Peminjaman Buku
             <small>List</small>
             <?php if ($this->session->userdata('level') === '1') : ?>
                 <div class="float-right"><a href="javascript:void(0);" class="btn btn-primary" data-toggle="modal" data-target="#Modal_Add"><span class="fa fa-plus"></span> Add New</a></div>
@@ -16,9 +16,12 @@
             <thead>
                 <tr>
                     <th>Nama Buku</th>
-                    <th>Penerbit</th>
-                    <th>Pengarang</th>
-                    <th style="text-align: right;">Actions</th>
+                    <th>Nama Member</th>
+                    <th>Tanggal Pinjam</th>
+                    <th>Tanggal Kembali</th>
+                    <?php if ($this->session->userdata('level') === '1') : ?>
+                        <th style="text-align: right;">Actions</th>
+                    <?php endif; ?>
                 </tr>
             </thead>
             <tbody id="show_data">
@@ -44,7 +47,7 @@
                         <div class="form-group row">
                             <label class="col-md-2 col-form-label">Kode Buku</label>
                             <div class="col-md-10">
-                                <input type="text" name="product_code" id="product_code" class="form-control" value="<?php echo sprintf("%04s", $id_bk) ?>" readonly>
+                                <input type="text" name="product_code" id="product_code" class="form-control" value="<?php echo sprintf("%04s", $id_pinjam) ?>" readonly>
                             </div>
                         </div>
                         <div class="form-group row">
@@ -215,26 +218,14 @@
         show_product(); //call function show all product
 
         $('#mydata').DataTable({
-            "columns": [
 
-                {
-                    "width": "40%"
-                },
-                {
-                    "width": "20%"
-                },
-                {
-                    "width": "20%"
-                },
-                null
-            ]
         });
 
         //function show all product
         function show_product() {
             $.ajax({
                 type: 'ajax',
-                url: '<?= base_url() ?>buku/product_data',
+                url: '<?= base_url() ?>pinjam/pinjam_data',
                 async: false,
                 dataType: 'json',
                 success: function(data) {
@@ -243,14 +234,13 @@
                     for (i = 0; i < data.length; i++) {
                         html += '<tr>' +
                             '<td>' + data[i].nama_bk + '</td>' +
-                            '<td>' + data[i].pengarang + '</td>' +
-                            '<td>' + data[i].penerbit + '</td>' +
+                            '<td>' + data[i].nama_mb + '</td>' +
+                            '<td>' + data[i].tgl_pinjam + '</td>' +
+                            '<td>' + data[i].tgl_kembali + '</td>' +
                             '<td style="text-align:right;">' +
                             '<?php if ($this->session->userdata('level') === '1') : ?> ' +
                             '<a href="javascript:void(0);" class="btn btn-info btn-sm item_edit" data-product_code="' + data[i].id_bk + '" data-product_name="' + data[i].nama_bk + '" data-pengarang="' + data[i].pengarang + '"data-penerbit="' + data[i].penerbit + '">Edit</a>' + ' ' +
                             '<a href="javascript:void(0);" class="btn btn-danger btn-sm item_delete" data-product_code="' + data[i].id_bk + '">Delete</a>' +
-                            ' <?php else : ?>' +
-                            '<a href="javascript:void(0);" class="btn btn-info btn-sm item_detail" data-product_code="' + data[i].id_bk + '" data-product_name="' + data[i].nama_bk + '" data-pengarang="' + data[i].pengarang + '"data-penerbit="' + data[i].penerbit + '" data-perolehan="' + data[i].perolehan + '">Detail</a>' + ' ' +
                             '<?php endif; ?>' +
                             '</td>' +
 

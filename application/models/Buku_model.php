@@ -14,7 +14,7 @@ class Buku_model extends CI_Model
             'id_bk' => $this->input->post('product_code'),
             'nama_bk' => $this->input->post('product_name'),
             'pengarang' => $this->input->post('pengarang'),
-            'pengarang' => $this->input->post('penerbit'),
+            'penerbit' => $this->input->post('penerbit'),
             'perolehan' => $this->input->post('perolehan'),
         );
         $result = $this->db->insert('pj_barang', $data);
@@ -47,6 +47,36 @@ class Buku_model extends CI_Model
         $id_bk = $this->input->post('product_code');
         $this->db->where('id_bk', $id_bk);
         $result = $this->db->delete('pj_barang');
+        return $result;
+    }
+    public function wish_product()
+    {
+        $this->db->select_max('wish_id', 'wishcode');
+        $query = $this->db->get('pj_wish');
+        $hasil = $query->row();
+        return $hasil->wishcode;
+    }
+    function wish_list()
+    {
+        $hasil = $this->db->get('pj_wish');
+        return $hasil->result();
+    }
+    function save_wish()
+    {
+        $data = array(
+            'wish_id' => $this->input->post('wish_code'),
+            'nama_wish' => $this->input->post('product_name'),
+            'pengarang' => $this->input->post('pengarang'),
+            'penerbit' => $this->input->post('penerbit'),
+        );
+        $result = $this->db->insert('pj_wish', $data);
+        return $result;
+    }
+    function delete_wish()
+    {
+        $wish_id = $this->input->post('wish_code');
+        $this->db->where('wish_id', $wish_id);
+        $result = $this->db->delete('pj_wish');
         return $result;
     }
 }

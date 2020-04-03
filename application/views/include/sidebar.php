@@ -41,7 +41,7 @@
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">List Menu:</h6>
                         <a class="collapse-item" href="<?= base_url(); ?>buku">Daftar Buku</a>
-                        <a class="collapse-item" href="cards.html">Cards</a>
+                        <a class="collapse-item" href="<?= base_url(); ?>buku/wishlist">Wishlist Buku</a>
                     </div>
                 </div>
             </li>
@@ -57,9 +57,6 @@
                         <div class="bg-white py-2 collapse-inner rounded">
                             <h6 class="collapse-header">Anggota :</h6>
                             <a class="collapse-item" href="<?= base_url(); ?>member">Daftar Anggota</a>
-                            <a class="collapse-item" href="utilities-border.html">Borders</a>
-                            <a class="collapse-item" href="utilities-animation.html">Animations</a>
-                            <a class="collapse-item" href="utilities-other.html">Other</a>
                         </div>
                     </div>
                 </li>
@@ -70,21 +67,19 @@
 
             <!-- Heading -->
             <div class="sidebar-heading">
-                Addons
+                OFFICE
             </div>
 
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
                     <i class="fas fa-fw fa-folder"></i>
-                    <span>Pages</span>
+                    <span>Peminjaman</span>
                 </a>
                 <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Login Screens:</h6>
-                        <a class="collapse-item" href="login.html">Login</a>
-                        <a class="collapse-item" href="register.html">Register</a>
-                        <a class="collapse-item" href="forgot-password.html">Forgot Password</a>
+                        <h6 class="collapse-header">Flow:</h6>
+                        <a class="collapse-item" href="<?= base_url(); ?>pinjam">Peminjaman</a>
                         <div class="collapse-divider"></div>
                         <h6 class="collapse-header">Other Pages:</h6>
                         <a class="collapse-item" href="404.html">404 Page</a>

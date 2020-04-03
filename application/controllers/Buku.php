@@ -17,6 +17,7 @@ class Buku extends CI_Controller
         $dari = $this->Buku_model->code_product();
         $urut = substr($dari, 0);
         $codenow = $urut + 1;
+
         $data = array('id_bk' => $codenow);
 
         $this->load->view('include/header', $datax);
@@ -24,8 +25,6 @@ class Buku extends CI_Controller
         $this->load->view('include/footer');
         /*print_r($data) to see the output*/
     }
-
-
     function product_data()
     {
         $data = $this->Buku_model->product_list();
@@ -46,6 +45,29 @@ class Buku extends CI_Controller
     function delete()
     {
         $data = $this->Buku_model->delete_product();
+        echo json_encode($data);
+    }
+    public function wishlist()
+    {
+        $datax['judul'] = "Daftar Wishlist";
+        $dari = $this->Buku_model->wish_product();
+        $urut = substr($dari, 0);
+        $codenow = $urut + 1;
+
+        $data = array('wish_code' => $codenow);
+
+        $this->load->view('include/header', $datax);
+        $this->load->view('buku/wishlist', $data);
+        $this->load->view('include/footer');
+    }
+    function wish_data()
+    {
+        $data = $this->Buku_model->wish_list();
+        echo json_encode($data);
+    }
+    function save_wish()
+    {
+        $data = $this->Buku_model->save_wish();
         echo json_encode($data);
     }
 }
