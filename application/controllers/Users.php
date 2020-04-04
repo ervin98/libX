@@ -1,11 +1,11 @@
 <?php
 
-class User extends CI_Controller
+class Users extends CI_Controller
 {
     public function __construct()
     {
         parent::__construct();
-        $this->load->model('Member_model');
+        $this->load->model('Users_model');
         $this->load->library('form_validation');
         $this->load->helper("url");
     }
@@ -13,13 +13,18 @@ class User extends CI_Controller
     public function index()
     {
         $datax['judul'] = 'Halaman User';
-        $dari = $this->Pinjam_model->code_pinjam();
+        $dari = $this->Users_model->code_user();
         $urut = substr($dari, 0);
         $codenow = $urut + 1;
-        $data = array('id_pinjam' => $codenow);
+        $data = array('id_users' => $codenow);
 
         $this->load->view('include/header', $datax);
-        $this->load->view('pinjam/index', $data);
+        $this->load->view('users/index', $data);
         $this->load->view('include/footer');
+    }
+    public function users_data()
+    {
+        $data = $this->Users_model->user_list();
+        echo json_encode($data);
     }
 }
