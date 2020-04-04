@@ -79,7 +79,9 @@
                 <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <a class="collapse-item" href="<?= base_url(); ?>pinjam">Peminjaman</a>
-                        <a class="collapse-item" href="<?= base_url(); ?>users">Admin</a>
+                        <?php if ($this->session->userdata('level') === '1') : ?>
+                            <a class="collapse-item" href="<?= base_url(); ?>users">Admin</a>
+                        <?php endif; ?>
                         <div class="collapse-divider"></div>
                         <h6 class="collapse-header">Other Pages:</h6>
                         <a class="collapse-item" href="404.html">404 Page</a>

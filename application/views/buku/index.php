@@ -156,56 +156,56 @@
         </div>
     </form>
     <!--END MODAL DELETE-->
-<?php endif; ?>
-
-<!-- MODAL DETAIL -->
-<form>
-    <div class="modal fade" id="Modal_Detail" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Detail Buku</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <table class="table">
-                        <tr>
-                            <th scope="row">ID Buku </th>
-                            <td><input type="text" name="product_code_dt" id="product_code_dt" class="form-control" readonly>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th scope="row">Nama </th>
-                            <td><input type="text" name="product_name_dt" id="product_name_dt" class="form-control" readonly>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th scope="row">Pengarang </th>
-                            <td><input type="text" name="pengarang" id="pengarang" class="form-control" readonly>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th scope="row">Penerbit </th>
-                            <td><input type="text" name="penerbit" id="penerbit" class="form-control" readonly>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th scope="row">Perolehan </th>
-                            <td><input type="text" name="perolehan" id="perolehan" class="form-control" readonly>
-                            </td>
-                        </tr>
-                    </table>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+<?php else : ?>
+    <!-- MODAL DETAIL -->
+    <form>
+        <div class="modal fade" id="Modal_Detail" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Detail Buku</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <table class="table">
+                            <tr>
+                                <th scope="row">ID Buku </th>
+                                <td><input type="text" name="product_code_dt" id="product_code_dt" class="form-control" readonly>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Nama </th>
+                                <td><input type="text" name="product_name_dt" id="product_name_dt" class="form-control" readonly>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Pengarang </th>
+                                <td><input type="text" name="pengarang" id="pengarang" class="form-control" readonly>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Penerbit </th>
+                                <td><input type="text" name="penerbit" id="penerbit" class="form-control" readonly>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Perolehan </th>
+                                <td><input type="text" name="perolehan" id="perolehan" class="form-control" readonly>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-</form>
-<!--END MODAL DETAIL-->
+    </form>
+    <!--END MODAL DETAIL-->
+<?php endif; ?>
 
 
 <?php $this->load->view('plus/datatable'); ?>
@@ -233,10 +233,10 @@
         //function show all product
         function show_product() {
             $.ajax({
-                type: 'ajax',
+                type: 'POST',
                 url: '<?= base_url() ?>buku/product_data',
                 async: false,
-                dataType: 'json',
+                dataType: 'JSON',
                 success: function(data) {
                     var html = '';
                     var i;
@@ -249,11 +249,10 @@
                             '<?php if ($this->session->userdata('level') === '1') : ?> ' +
                             '<a href="javascript:void(0);" class="btn btn-info btn-sm item_edit" data-product_code="' + data[i].id_bk + '" data-product_name="' + data[i].nama_bk + '" data-pengarang="' + data[i].pengarang + '"data-penerbit="' + data[i].penerbit + '">Edit</a>' + ' ' +
                             '<a href="javascript:void(0);" class="btn btn-danger btn-sm item_delete" data-product_code="' + data[i].id_bk + '">Delete</a>' +
-                            ' <?php else : ?>' +
-                            '<a href="javascript:void(0);" class="btn btn-info btn-sm item_detail" data-product_code="' + data[i].id_bk + '" data-product_name="' + data[i].nama_bk + '" data-pengarang="' + data[i].pengarang + '"data-penerbit="' + data[i].penerbit + '" data-perolehan="' + data[i].perolehan + '">Detail</a>' + ' ' +
+                            '<?php else : ?>' +
+                            '<a href="javascript:void(0);" class="btn btn-info btn-sm item_detail" data-product_code="' + data[i].id_bk + '" data-product_name="' + data[i].nama_bk + '" data-pengarang="' + data[i].pengarang + '"data-penerbit="' + data[i].penerbit + '" data-perolehan="' + data[i].perolehan + '">Detail</a>' +
                             '<?php endif; ?>' +
                             '</td>' +
-
                             '</tr>';
                     }
                     $('#show_data').html(html);
